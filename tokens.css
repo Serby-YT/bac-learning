@@ -1,0 +1,185 @@
+/* Bac Learning tokens — forked from Trading Claude (Rosokai): same liquid glass, violet accent instead of signal blue.
+ * paper oklch(13.5% 0.003 260) neutral graphite · accent oklch(64% 0.19 292) violet · up oklch(72.3% 0.192 149.6) · down oklch(63.7% 0.237 25.3)
+ * display + body: Geist (single-family, tabular numerals) · mono: Geist Mono
+ * axes: dark / geometric-sans / cool
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* ---- solid surfaces (also the no-transparency fallback) ---- */
+  --color-paper: oklch(13.5% 0.003 260);
+  --color-paper-2: oklch(18% 0.004 260);
+  --color-paper-3: oklch(22.5% 0.005 260);
+  --color-paper-4: oklch(27% 0.006 260);
+  --color-rule: oklch(100% 0 0 / 0.08);
+  --color-rule-strong: oklch(100% 0 0 / 0.16);
+
+  /* ---- text ---- */
+  --color-ink: oklch(97% 0.002 260);
+  --color-ink-2: oklch(84% 0.005 260);
+  --color-ink-3: oklch(67% 0.007 260);
+
+  /* ---- gains & losses ---- */
+  --color-up: oklch(72.3% 0.192 149.6);
+  --color-up-soft: oklch(72.3% 0.192 149.6 / 0.15);
+  --color-up-flash: oklch(72.3% 0.192 149.6 / 0.32);
+  --color-down: oklch(63.7% 0.237 25.3);
+  --color-down-soft: oklch(63.7% 0.237 25.3 / 0.15);
+  --color-down-flash: oklch(63.7% 0.237 25.3 / 0.32);
+  --color-on-signal: oklch(15% 0.005 260);
+
+  /* ---- accent ---- */
+  --color-accent: oklch(64% 0.19 292);
+  --color-accent-hover: oklch(70% 0.17 292);
+  --color-accent-soft: oklch(64% 0.19 292 / 0.2);
+  --color-on-accent: oklch(99% 0 0);
+  --color-focus: oklch(76% 0.14 292);
+  --color-caution: oklch(84% 0.13 85);
+  --color-caution-soft: oklch(84% 0.13 85 / 0.14);
+  --color-scrim: oklch(13.5% 0.003 260 / 0.6);
+
+  /* ---- asset-class colours (monograms) ---- */
+
+  /* ---- liquid glass ---- */
+  --glass-fill: oklch(100% 0 0 / 0.06);
+  --glass-fill-low: oklch(100% 0 0 / 0.025);
+  --glass-fill-hover: oklch(100% 0 0 / 0.1);
+  --glass-tint: oklch(100% 0 0 / 0.045);
+  --glass-edge: oklch(100% 0 0 / 0.12);
+  --glass-highlight: oklch(100% 0 0 / 0.22);
+  --glass-sheen: oklch(100% 0 0 / 0.07);
+  --glass-well: oklch(0% 0 0 / 0.22);
+  --glass-blur: 28px;
+  --bar-fill: oklch(13.5% 0.003 260 / 0.55);
+  --bar-fill-scrolled: oklch(13.5% 0.003 260 / 0.8);
+  --shadow-bar: 0 10px 30px -18px oklch(0% 0 0 / 0.9);
+  --texture-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --shadow-glass: 0 1px 2px oklch(0% 0 0 / 0.25), 0 24px 48px -24px oklch(0% 0 0 / 0.7);
+  --shadow-pop: 0 18px 40px -12px oklch(0% 0 0 / 0.6);
+
+
+  /* ---- ambient light behind the glass ---- */
+  /* neutral light only — colour lives in the data, not the backdrop */
+  --glow-key: oklch(100% 0 0 / 0.06);
+  --glow-fill: oklch(100% 0 0 / 0.025);
+
+  /* ---- indicator lines (mirrored as hex in lib/theme.ts for the canvas chart) ---- */
+
+  /* ---- Claude's chart drawings (mirrored in lib/theme.ts) ---- */
+
+  /* ---- type ---- */
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  --text-2xs: 0.6875rem; /* 11 */
+  --text-xs: 0.75rem; /* 12 */
+  --text-sm: 0.8125rem; /* 13 */
+  --text-md: 0.875rem; /* 14 */
+  --text-base: 0.9375rem; /* 15 */
+  --text-lg: 1.125rem; /* 18 */
+  --text-xl: 1.375rem; /* 22 */
+  --text-2xl: 1.75rem; /* 28 */
+  --text-price: clamp(1.875rem, 1.3rem + 1.6vw, 2.5rem);
+  --text-display: clamp(1.75rem, 1.3rem + 1.4vw, 2.25rem);
+
+  /* ---- space (4-pt) ---- */
+  --space-3xs: 2px;
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* ---- shape ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-card: 22px;
+  --radius-pill: 999px;
+  --rule-hair: 1px;
+
+  /* ---- layout ---- */
+  --topbar-h: 64px;
+  --rail-w: 352px;
+  --learn-w: 320px;
+  --page-max: 1760px;
+  --workspace-max: 1960px;
+
+  /* ---- motion ---- */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 120ms;
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-flash: 1100ms;
+}
+
+/* Top bar glass (see .topbar::before in globals.css). */
+:root {
+  --nav-glass: linear-gradient(to bottom, oklch(13.5% 0.003 260 / 0.66) 0%, oklch(13.5% 0.003 260 / 0.28) 100%);
+}
+
+/* ================= Light theme =================
+ * Same palette as serban-photo.com's light theme: warm off-white paper,
+ * near-black ink. Gains/losses and accents are deepened so they keep
+ * their contrast on a light background. Chosen with the switch in the top
+ * bar; follows the device setting until then (inline script in app/layout.tsx). */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-paper: #f4f2ed;
+  --color-paper-2: #ebe8e1;
+  --color-paper-3: #fdfcfa;
+  --color-paper-4: #dedad2;
+  --color-rule: rgb(21 22 26 / 0.09);
+  --color-rule-strong: rgb(21 22 26 / 0.17);
+
+  --color-ink: #15161a;
+  --color-ink-2: #3b3d43;
+  --color-ink-3: #6c6e73;
+
+  --color-up: oklch(54% 0.15 150);
+  --color-up-soft: oklch(54% 0.15 150 / 0.12);
+  --color-up-flash: oklch(54% 0.15 150 / 0.26);
+  --color-down: oklch(54% 0.2 25);
+  --color-down-soft: oklch(54% 0.2 25 / 0.11);
+  --color-down-flash: oklch(54% 0.2 25 / 0.24);
+  --color-on-signal: #ffffff;
+
+  --color-accent: oklch(52% 0.2 292);
+  --color-accent-hover: oklch(46% 0.2 292);
+  --color-accent-soft: oklch(52% 0.2  292 / 0.14);
+  --color-on-accent: #ffffff;
+  --color-focus: oklch(50% 0.19 292);
+  --color-caution: oklch(52% 0.12 65);
+  --color-caution-soft: oklch(80% 0.12 80 / 0.28);
+  --color-scrim: rgb(244 242 237 / 0.7);
+
+
+
+  /* Glass on a light page: whiter than the paper, dark hairline edge, bright top rim. */
+  --glass-fill: rgb(255 255 255 / 0.62);
+  --glass-fill-low: rgb(255 255 255 / 0.38);
+  --glass-fill-hover: rgb(255 255 255 / 0.92);
+  --glass-tint: rgb(21 22 26 / 0.04);
+  --glass-edge: rgb(21 22 26 / 0.11);
+  --glass-highlight: rgb(255 255 255 / 0.9);
+  --glass-sheen: rgb(255 255 255 / 0.5);
+  --glass-well: rgb(21 22 26 / 0.05);
+  --bar-fill: rgb(246 244 240 / 0.6);
+  --bar-fill-scrolled: rgb(246 244 240 / 0.85);
+  --shadow-bar: 0 10px 30px -18px rgb(21 22 26 / 0.25);
+  --shadow-glass: 0 1px 2px rgb(21 22 26 / 0.05), 0 24px 48px -26px rgb(21 22 26 / 0.2);
+  --shadow-pop: 0 18px 40px -12px rgb(21 22 26 / 0.22);
+  --nav-glass: linear-gradient(to bottom, rgb(246 244 240 / 0.72) 0%, rgb(246 244 240 / 0.3) 100%);
+
+  --glow-key: rgb(255 255 255 / 0.75);
+  --glow-fill: rgb(255 255 255 / 0.4);
+
+
+}
