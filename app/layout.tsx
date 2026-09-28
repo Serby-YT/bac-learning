@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import TopBar from "@/components/TopBar";
+import ProgressSync from "@/components/ProgressSync";
 import "katex/dist/katex.min.css";
 import "../tokens.css";
 import "./globals.css";
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <div className="ambient" aria-hidden="true" />
         <TopBar />
+        <ProgressSync />
         {children}
       </body>
     </html>

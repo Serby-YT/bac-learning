@@ -6,17 +6,22 @@
     "dev": "next dev -p 3006",
     "build": "next build",
     "start": "next start -p 3006",
-    "check": "tsc --noEmit && tsx scripts/check-content.ts"
+    "check": "tsc --noEmit && tsx scripts/check-content.ts",
+    "test": "tsx --test scripts/test-merge.ts"
   },
   "dependencies": {
+    "better-auth": "^1.7.6",
     "katex": "^0.16.22",
     "next": "^16.2.10",
+    "nodemailer": "^10.0.12",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@types/katex": "^0.16.7",
     "@types/node": "^26.1.1",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "tsx": "^4.23.15",

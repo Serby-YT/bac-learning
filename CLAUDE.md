@@ -12,7 +12,7 @@ Wick mascot, voice and chart art.
   from M2 students. Subiectul I topics are common to both.
 - Users: **public, with accounts** — but built in stages:
   1. Lessons, progress in the browser (localStorage `bac-progress-v1`) ← DONE
-  2. Accounts (Google + email magic link) + database; import localStorage progress
+  2. Accounts (Google + email magic link) + database; import localStorage progress ← DONE
   3. Română essays graded by Claude against the barem — **only Serban's account**
      for now (API costs money). Never render student text through `Rich` (it
      injects KaTeX HTML); essays need plain-text rendering.
@@ -20,9 +20,24 @@ Wick mascot, voice and chart art.
      other apps; never checkout a branch in a live docroot)
 - Brand name is a placeholder ("Bac · beta"). Ask before naming.
 
+## Accounts (stage 2)
+
+- Better Auth (`lib/auth.ts`) on `node:sqlite` (`lib/db.ts`) — no native modules, so the
+  Mac-built standalone bundle runs on the Linux server. Tables are migrated at startup
+  (`instrumentation.ts`). DB file = `DATABASE_PATH` (gitignored `data/`; locally an absolute
+  path in `.env.local`, because the preview server starts from another folder).
+- Progress stays in localStorage; `components/ProgressSync.tsx` pushes it after every change
+  and on sign-in. `PUT /api/progress` sanitizes and **merges** (`lib/mergeProgress.ts`,
+  tested by `npm test`) — never overwrites. Sign-out clears the browser copy.
+- No `SMTP_URL` → in dev the magic link is printed in the server log (preview_logs, search
+  "magic-link/verify"); in production sending fails loudly. Google button only appears when
+  `GOOGLE_CLIENT_ID`/`SECRET` are set. See `.env.example`.
+- Spec + tickets: `.scratch/accounts/` (gitignored).
+
 ## Commands
 
 - Dev: preview server `bac-learning` (port 3006) from `~/Documents/Claude Code/.claude/launch.json`
+- `npm test` — merge/sanitize unit tests
 - `npm run check` — type-check + validate every lesson (answer indexes, KaTeX,
   test-pool sizes). Run after every content change.
 - `npx next build` — production build (standalone output, like Trading Claude)

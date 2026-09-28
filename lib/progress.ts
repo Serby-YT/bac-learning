@@ -2,38 +2,17 @@
 
 import { useEffect, useState } from "react";
 import type { Program } from "./content/types";
+import { EMPTY_STATE as EMPTY, type LearnState } from "./mergeProgress";
 
-// Progress, kept in this browser for now (stage 1). Stage 2 moves it to the
-// server behind a login; the shape stays the same so it can be imported.
-export interface LearnState {
-  /** lessonId → best accuracy (0–1) */
-  done: Record<string, number>;
-  xp: number;
-  streak: number;
-  /** yyyy-mm-dd (local) of the last day a lesson was finished */
-  lastDay: string | null;
-  /** local days with at least one finished lesson, newest last (max 60) */
-  days: string[];
-  /** XP earned per day — only today's entry is kept */
-  todayXp: Record<string, number>;
-  /** chapter (unit) id → best chapter-test score, out of TEST_SIZE */
-  tests: Record<string, number>;
-  /** Math exam variant; null until chosen. */
-  program: Program | null;
-}
+// Progress lives in this browser (localStorage) so anyone can learn without an
+// account. When signed in, components/ProgressSync.tsx mirrors it to the server:
+// every change made here fires CHANGED_EVENT, which the sync pushes.
+export type { LearnState };
 
 const KEY = "bac-progress-v1";
 const EVENT = "bac-progress";
-const EMPTY: LearnState = {
-  done: {},
-  xp: 0,
-  streak: 0,
-  lastDay: null,
-  days: [],
-  todayXp: {},
-  tests: {},
-  program: null,
-};
+/** Fired only for changes the student made here (not for data pulled from the server). */
+export const CHANGED_EVENT = "bac-progress-changed";
 
 export const XP_LESSON = 10;
 export const XP_PERFECT = 5;
@@ -63,11 +42,31 @@ export function readLearn(): LearnState {
   }
 }
 
-function save(next: LearnState) {
+function write(next: LearnState) {
   try {
     localStorage.setItem(KEY, JSON.stringify(next));
   } catch {
     // private mode — progress just won't persist
+  }
+  window.dispatchEvent(new Event(EVENT));
+}
+
+function save(next: LearnState) {
+  write(next);
+  window.dispatchEvent(new Event(CHANGED_EVENT));
+}
+
+/** Replace this browser's copy with the server's (after a sync). */
+export function replaceLearn(next: LearnState) {
+  write(next);
+}
+
+/** Forget this browser's copy (on sign-out: the account keeps it). */
+export function clearLearn() {
+  try {
+    localStorage.removeItem(KEY);
+  } catch {
+    // nothing stored
   }
   window.dispatchEvent(new Event(EVENT));
 }

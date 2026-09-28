@@ -4,9 +4,12 @@ import Link from "next/link";
 import { SUBJECTS, unitsFor } from "@/lib/content";
 import { DAILY_GOAL_XP, liveStreak, localDay, testPassed, unitOpen, useLearn, xpToday } from "@/lib/progress";
 import { Flame } from "@/components/LessonPlayer";
+import { useSession } from "@/lib/auth-client";
 
 export default function Home() {
   const s = useLearn();
+  const { data: session, isPending } = useSession();
+  const hasProgress = !!s && (s.xp > 0 || Object.keys(s.done).length > 0);
   const streak = s ? liveStreak(s) : 0;
   const today = s ? xpToday(s) : 0;
   const learnedToday = s?.lastDay === localDay();
@@ -39,6 +42,15 @@ export default function Home() {
           <span className="learn-stat-label">XP azi</span>
         </div>
       </section>
+
+      {!isPending && !session && hasProgress && (
+        <section className="glass save-nudge">
+          <p>Progresul tău e salvat doar în acest browser. Fă-ți cont ca să nu-l pierzi și să-l ai pe orice dispozitiv.</p>
+          <Link className="btn btn-primary" href="/cont">
+            Salvează progresul
+          </Link>
+        </section>
+      )}
 
       <div className="subjects">
         {SUBJECTS.map((subj) => {

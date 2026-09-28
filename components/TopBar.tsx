@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { THEME_KEY, setTheme, useTheme } from "@/lib/useTheme";
+import AccountButton from "./AccountButton";
 
 // Same glass bar as Trading Claude: wordmark, sections, light/dark switch.
 // The name is a placeholder until the brand is chosen.
@@ -60,6 +61,7 @@ export default function TopBar() {
       </nav>
 
       <div className="topbar-right">
+        <AccountButton />
         <button
           type="button"
           className="theme-toggle"

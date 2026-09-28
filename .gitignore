@@ -8,3 +8,6 @@ next-env.d.ts
 .claude/settings.local.json
 .deploy/
 /.scratch/
+
+# local database (accounts + progress)
+/data/
