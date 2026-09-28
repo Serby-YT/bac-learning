@@ -5,6 +5,11 @@
 import type { Program, Question, Card, Subject, SubjectId, Unit } from "./types";
 import { progresii } from "./mate-progresii";
 import { functii } from "./mate-functii";
+import { logaritmi } from "./mate-logaritmi";
+import { complexe } from "./mate-complexe";
+import { combinatorica } from "./mate-combinatorica";
+import { geometrie } from "./mate-geometrie";
+import { trigonometrie } from "./mate-trigonometrie";
 import { curente } from "./ro-curente";
 import { poezie } from "./ro-poezie";
 
@@ -24,7 +29,19 @@ export const SUBJECTS: Subject[] = [
 ];
 
 /** In order: each subject's chapters unlock one after another. */
-export const UNITS: Unit[] = [progresii, functii, curente, poezie];
+export const UNITS: Unit[] = [
+  // matematică
+  progresii,
+  functii,
+  logaritmi,
+  complexe,
+  combinatorica,
+  geometrie,
+  trigonometrie,
+  // română
+  curente,
+  poezie,
+];
 
 export const TEST_SIZE = 10;
 export const TEST_PASS = 8;
