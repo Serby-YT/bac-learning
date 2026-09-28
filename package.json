@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p 3006",
     "check": "tsc --noEmit && tsx scripts/check-content.ts",
-    "test": "tsx --test scripts/test-merge.ts"
+    "test": "tsx --test scripts/test-learn-state.ts"
   },
   "dependencies": {
     "better-auth": "^1.7.6",

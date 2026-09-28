@@ -2198,3 +2198,11 @@ svg.spark {
   color: var(--color-ink-2);
   font-size: var(--text-sm);
 }
+
+.account-note {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-up-soft);
+  color: var(--color-up);
+  font-size: var(--text-sm);
+}

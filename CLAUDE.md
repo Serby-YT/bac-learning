@@ -27,11 +27,14 @@ Wick mascot, voice and chart art.
   (`instrumentation.ts`). DB file = `DATABASE_PATH` (gitignored `data/`; locally an absolute
   path in `.env.local`, because the preview server starts from another folder).
 - Progress stays in localStorage; `components/ProgressSync.tsx` pushes it after every change
-  and on sign-in. `PUT /api/progress` sanitizes and **merges** (`lib/mergeProgress.ts`,
+  and on sign-in. `PUT /api/progress` sanitizes and **merges** (`lib/learnState.ts`,
   tested by `npm test`) — never overwrites. Sign-out clears the browser copy.
 - No `SMTP_URL` → in dev the magic link is printed in the server log (preview_logs, search
   "magic-link/verify"); in production sending fails loudly. Google button only appears when
   `GOOGLE_CLIENT_ID`/`SECRET` are set. See `.env.example`.
+- Delete account = email confirmation → `/cont/sterge` (button, needs a session on that device).
+- Rate limits key on `CF-Connecting-IP`. **Stage 4 must keep the app reachable only through the
+  Cloudflare tunnel (and Tailscale)** — if the port were public, anyone could forge that header.
 - Spec + tickets: `.scratch/accounts/` (gitignored).
 
 ## Commands

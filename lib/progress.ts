@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Program } from "./content/types";
-import { EMPTY_STATE as EMPTY, type LearnState } from "./mergeProgress";
+import { EMPTY_STATE, MAX_DAYS, type LearnState } from "./learnState";
 
 // Progress lives in this browser (localStorage) so anyone can learn without an
 // account. When signed in, components/ProgressSync.tsx mirrors it to the server:
@@ -10,6 +10,8 @@ import { EMPTY_STATE as EMPTY, type LearnState } from "./mergeProgress";
 export type { LearnState };
 
 const KEY = "bac-progress-v1";
+/** Which account this browser's copy belongs to (set after a sync; absent = not yet in any account). */
+const OWNER_KEY = "bac-progress-owner";
 const EVENT = "bac-progress";
 /** Fired only for changes the student made here (not for data pulled from the server). */
 export const CHANGED_EVENT = "bac-progress-changed";
@@ -33,16 +35,17 @@ function yesterday() {
 }
 
 export function readLearn(): LearnState {
-  if (typeof window === "undefined") return EMPTY;
+  if (typeof window === "undefined") return EMPTY_STATE;
   try {
     const s = JSON.parse(localStorage.getItem(KEY) ?? "null");
-    return s ? { ...EMPTY, ...s } : EMPTY;
+    return s ? { ...EMPTY_STATE, ...s } : EMPTY_STATE;
   } catch {
-    return EMPTY;
+    return EMPTY_STATE;
   }
 }
 
-function write(next: LearnState) {
+/** Replace this browser's copy without counting it as a change (e.g. after a sync). */
+export function replaceLearn(next: LearnState) {
   try {
     localStorage.setItem(KEY, JSON.stringify(next));
   } catch {
@@ -52,19 +55,15 @@ function write(next: LearnState) {
 }
 
 function save(next: LearnState) {
-  write(next);
+  replaceLearn(next);
   window.dispatchEvent(new Event(CHANGED_EVENT));
-}
-
-/** Replace this browser's copy with the server's (after a sync). */
-export function replaceLearn(next: LearnState) {
-  write(next);
 }
 
 /** Forget this browser's copy (on sign-out: the account keeps it). */
 export function clearLearn() {
   try {
     localStorage.removeItem(KEY);
+    localStorage.removeItem(OWNER_KEY);
   } catch {
     // nothing stored
   }
@@ -91,7 +90,7 @@ function record(s: LearnState, earned: number, patch: Partial<LearnState>) {
     xp: s.xp + earned,
     streak: newDay ? prevStreak + 1 : Math.max(prevStreak, 1),
     lastDay: today,
-    days: s.days.includes(today) ? s.days : [...s.days, today].slice(-60),
+    days: s.days.includes(today) ? s.days : [...s.days, today].slice(-MAX_DAYS),
     todayXp: { [today]: (s.todayXp[today] ?? 0) + earned },
   };
   save(next);
@@ -117,7 +116,7 @@ export function completeTest(unitId: string, correct: number) {
 }
 
 export function setProgram(program: Program) {
-  save({ ...readLearn(), program });
+  save({ ...readLearn(), program, programAt: Date.now() });
 }
 
 export const testPassed = (s: LearnState | null, unitId: string) => (s?.tests?.[unitId] ?? 0) >= PASS;
@@ -140,4 +139,20 @@ export function useLearn(): LearnState | null {
     };
   }, []);
   return state;
+}
+
+export function learnOwner(): string | null {
+  try {
+    return localStorage.getItem(OWNER_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export function setLearnOwner(userId: string) {
+  try {
+    localStorage.setItem(OWNER_KEY, userId);
+  } catch {
+    // private mode — ownership just won't be remembered
+  }
 }
