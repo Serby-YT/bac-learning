@@ -12,6 +12,10 @@ import { geometrie } from "./mate-geometrie";
 import { trigonometrie } from "./mate-trigonometrie";
 import { curente } from "./ro-curente";
 import { poezie } from "./ro-poezie";
+import { basmNuvela } from "./ro-basm-nuvela";
+import { roman } from "./ro-roman";
+import { dramaturgie } from "./ro-dramaturgie";
+import { limba } from "./ro-limba";
 
 export type * from "./types";
 
@@ -41,6 +45,10 @@ export const UNITS: Unit[] = [
   // română
   curente,
   poezie,
+  basmNuvela,
+  roman,
+  dramaturgie,
+  limba,
 ];
 
 export const TEST_SIZE = 10;

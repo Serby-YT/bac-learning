@@ -22,12 +22,12 @@ import { completeLesson, completeTest, DAILY_GOAL_XP, unitOpen, useLearn } from 
 
 type Picked = number | boolean | null;
 
-/** Option order: shuffled (3+ options), unless order carries meaning. */
+/** Option order: always shuffled, unless order carries meaning ("toate variantele"...). */
 function optionOrder(card: Card): number[] {
   if (card.type !== "choice") return [];
   const idx = card.options.map((_, i) => i);
   const fixed =
-    card.options.length < 3 || card.options.some((o) => /^(toate|niciuna|ambele)( (variantele|de mai sus))?/i.test(o));
+    card.options.length < 2 || card.options.some((o) => /^(toate|niciuna|ambele)( (variantele|de mai sus))?/i.test(o));
   if (fixed) return idx;
   for (let i = idx.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));

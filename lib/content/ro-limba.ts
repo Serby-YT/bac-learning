@@ -1,0 +1,292 @@
+import type { Unit } from "./types";
+
+// Română · capitolul 6 — limbă și comunicare pentru Subiectul I: ortografie,
+// punctuație, vocabular. Greșelile pe care le taie cel mai des corectorii.
+
+export const limba: Unit = {
+  id: "limba",
+  subject: "romana",
+  title: "Limbă: ortografie, punctuație, vocabular",
+  blurb: "Greșelile care costă puncte în orice subiect și cerințele de vocabular de la Subiectul I.",
+  examRef: "Subiectul I",
+  lessons: [
+    {
+      id: "ortografie",
+      title: "Ortografie",
+      cards: [
+        {
+          type: "learn",
+          title: "„Nu mai” sau „numai”?",
+          body: "**Nu mai** = negație + „mai”: „Nu mai plouă.” Opusul ar fi „mai plouă”.\n\n**Numai** = doar: „Am numai zece lei.”\n\nTest rapid: dacă poți pune „doar” în loc, scrii **numai**.",
+        },
+        {
+          type: "choice",
+          prompt: "Completează: „După examen, ___ am avut timp de nimic.”",
+          options: ["nu mai", "numai"],
+          answer: 0,
+          explain: "E negație: „nu mai am avut timp”. „Doar am avut timp” nu are sens aici.",
+        },
+        {
+          type: "learn",
+          title: "S-a / sa, s-au / sau, i-a / ia, l-a / la",
+          body: "Cu cratimă, sunt **două cuvinte** (pronume + verbul „a avea”):\n\n„El **s-a** dus.” „Ei **s-au** întâlnit.” „**I-a** spus.” „**L-a** văzut.”\n\nFără cratimă, e un singur cuvânt: „casa **sa**”, „ceai **sau** cafea”, „El **ia** cartea”, „merge **la** școală”.",
+        },
+        {
+          type: "choice",
+          prompt: "Completează: „Elevul ___ pregătit serios pentru bac.”",
+          options: ["s-a", "sa"],
+          answer: 0,
+          explain: "Pronumele „s(e)” + verbul „a”: „s-a pregătit”.",
+        },
+        {
+          type: "choice",
+          prompt: "Completează: „Vrei ceai ___ cafea?”",
+          options: ["sau", "s-au"],
+          answer: 0,
+          explain: "Aici e conjuncția „sau” (ori), un singur cuvânt.",
+        },
+        {
+          type: "learn",
+          title: "Copiii, fiii",
+          body: "Forma articulată de plural a substantivelor terminate în „-ii” primește încă un „i”:\n\ncopil → copii → **copiii**; fiu → fii → **fiii**.\n\n„Niște copii” (nearticulat), dar „**copiii** au venit” (articulat).",
+        },
+        {
+          type: "choice",
+          prompt: "Care formă este corectă?",
+          options: ["Copiii au plecat în excursie.", "Copii au plecat în excursie."],
+          answer: 0,
+          explain: "Substantiv articulat hotărât, la plural: „copiii”, cu trei i.",
+        },
+        {
+          type: "learn",
+          title: "„Să fii” sau „să fi”?",
+          body: "**Să fii** = verbul „a fi” la persoana a II-a: „Vreau **să fii** atent.”\n\n**Să fi** apare în forme compuse: „Pare **să fi** plecat.” „Ar fi trebuit **să fi** învățat.”\n\nTest rapid: pune „tu” în față. Dacă merge „(tu) să fii”, scrii cu doi i.",
+        },
+        {
+          type: "truefalse",
+          prompt: "Propoziția „Am decât zece lei.” este corectă.",
+          answer: false,
+          explain: "„Decât” cu sens de „doar” cere o negație: „**Nu** am decât zece lei.” Altfel folosești „doar” sau „numai”.",
+        },
+      ],
+    },
+    {
+      id: "punctuatie",
+      title: "Punctuație",
+      cards: [
+        {
+          type: "learn",
+          title: "Unde NU pui virgulă",
+          body: "Nu pui virgulă între **subiect și predicat**, chiar dacă subiectul e lung:\n\n„Elevii din clasa a XII-a au susținut examenul.” (fără virgulă după „a XII-a”)\n\nNu pui virgulă nici între predicat și **complementul direct**.",
+        },
+        {
+          type: "truefalse",
+          prompt: "Propoziția „Profesorii noștri de la liceu, au organizat o simulare.” este corect punctuată.",
+          answer: false,
+          explain: "Virgula desparte greșit subiectul („Profesorii noștri de la liceu”) de predicat („au organizat”).",
+        },
+        {
+          type: "learn",
+          title: "Vocativul și apoziția",
+          body: "**Vocativul** (cel strigat) se desparte prin virgulă: „**Andrei**, vino aici!” „Vino, **Andrei**, aici!”\n\n**Apoziția** (o explicație pusă lângă un nume) se izolează prin virgule: „Ion Creangă, **autorul poveștilor**, s-a născut la Humulești.”",
+        },
+        {
+          type: "choice",
+          prompt: "Care propoziție este corect punctuată?",
+          options: [
+            "Maria, te rog să vii mâine.",
+            "Maria te rog, să vii mâine.",
+            "Maria te rog să vii, mâine.",
+            "Maria, te rog, să vii, mâine.",
+          ],
+          answer: 0,
+          explain: "Doar vocativul „Maria” se desparte prin virgulă.",
+        },
+        {
+          type: "learn",
+          title: "Înainte de „dar”",
+          body: "Conjuncțiile adversative (**dar, iar, însă, ci**) se despart prin virgulă când leagă propoziții: „Am învățat mult, **dar** nu am luat nota dorită.”\n\nLa „și” copulativ, de regulă, **nu** pui virgulă: „Am citit și am înțeles.”",
+        },
+        {
+          type: "choice",
+          prompt: "Completează corect: „A plouat toată ziua___ meciul s-a jucat.”",
+          options: [", dar", " dar", " și,", ": dar"],
+          answer: 0,
+          explain: "Opoziție între două propoziții: virgulă înainte de „dar”.",
+        },
+        {
+          type: "learn",
+          title: "Două puncte, linia de dialog, cratima",
+          body: "**Două puncte** anunță o enumerare, o explicație sau vorbirea directă.\n\n**Linia de dialog** marchează începutul replicii unui personaj.\n\n**Cratima** leagă cuvinte rostite împreună („într-o”, „s-a”, „dă-mi”) sau desparte cuvintele în silabe la capăt de rând. La Subiectul I: „Precizează rolul cratimei” → „marchează rostirea legată a două cuvinte”.",
+        },
+        {
+          type: "choice",
+          prompt: "Ce rol are cratima în „într-o zi”?",
+          options: [
+            "marchează rostirea legată a două cuvinte",
+            "desparte cuvântul în silabe",
+            "marchează o enumerare",
+            "introduce vorbirea directă",
+          ],
+          answer: 0,
+          explain: "„Într-o” = „într” + „o”, rostite împreună.",
+        },
+      ],
+    },
+    {
+      id: "vocabular",
+      title: "Vocabular",
+      cards: [
+        {
+          type: "learn",
+          title: "Sinonime, antonime, omonime, paronime",
+          body: "**Sinonime**: sens asemănător („a zări” / „a vedea”).\n\n**Antonime**: sens opus („bun” / „rău”).\n\n**Omonime**: aceeași formă, sensuri diferite („broască”: animal / încuietoare).\n\n**Paronime**: formă asemănătoare, sensuri diferite. Aici se greșește cel mai des: „eminent” (remarcabil) / „iminent” (care urmează sigur); „familial” (de familie) / „familiar” (cunoscut).",
+        },
+        {
+          type: "choice",
+          prompt: "Care pereche este formată din paronime?",
+          options: ["eminent – iminent", "bun – rău", "a merge – a umbla", "broască – broască"],
+          answer: 0,
+          explain: "Formă asemănătoare, sens diferit. Celelalte: antonime, sinonime, omonime.",
+        },
+        {
+          type: "choice",
+          prompt: "Completează: „Au avut o discuție despre o problemă ___ (de familie).”",
+          options: ["familială", "familiară"],
+          answer: 0,
+          explain: "„Familial” = legat de familie. „Familiar” = cunoscut, apropiat.",
+        },
+        {
+          type: "learn",
+          title: "Pleonasmul",
+          body: "Pleonasmul repetă inutil aceeași idee: „a urca **sus**”, „a coborî **jos**”, „a reveni **înapoi**”, „cea mai **optimă**” („optim” înseamnă deja „cel mai bun”).\n\nÎn textul argumentativ și în eseu, un pleonasm te costă la punctajul pentru exprimare.",
+        },
+        {
+          type: "truefalse",
+          prompt: "„A reveni înapoi” este un pleonasm.",
+          answer: true,
+          explain: "„A reveni” conține deja ideea de „înapoi”.",
+        },
+        {
+          type: "learn",
+          title: "Sens propriu și sens figurat",
+          body: "**Sensul propriu** e sensul de bază: „inima pompează sânge”.\n\n**Sensul figurat** e o extindere, prin asemănare: „are o **inimă** de aur” (e bun).\n\nLa Subiectul I: „Explică sensul din text al secvenței...” Răspunde cu sensul din contextul dat, nu cu definiția din dicționar.",
+        },
+        {
+          type: "choice",
+          prompt: "În ce sens e folosit cuvântul „rece” în „O privire rece”?",
+          options: ["figurat: distant, lipsit de afecțiune", "propriu: cu temperatură scăzută", "e un omonim", "e un pleonasm"],
+          answer: 0,
+          explain: "Privirea nu are temperatură: „rece” descrie o atitudine.",
+        },
+        {
+          type: "choice",
+          prompt: "Care este un sinonim potrivit pentru „a zări”?",
+          options: ["a observa", "a auzi", "a ascunde", "a uita"],
+          answer: 0,
+          explain: "„A zări” = a vedea, a observa (de obicei de departe sau pentru scurt timp).",
+        },
+      ],
+    },
+  ],
+  test: [
+    // ortografie
+    {
+      lesson: "ortografie",
+      type: "choice",
+      prompt: "Completează: „Ei ___ întâlnit la bibliotecă.”",
+      options: ["s-au", "sau"],
+      answer: 0,
+      explain: "Pronume + verbul auxiliar: „s-au întâlnit”.",
+    },
+    {
+      lesson: "ortografie",
+      type: "choice",
+      prompt: "Completează: „Am citit ___ primul capitol, restul mâine.”",
+      options: ["numai", "nu mai"],
+      answer: 0,
+      explain: "Înseamnă „doar primul capitol”.",
+    },
+    {
+      lesson: "ortografie",
+      type: "choice",
+      prompt: "Completează: „Te rog ___ punctual.”",
+      options: ["să fii", "să fi"],
+      answer: 0,
+      explain: "„(Tu) să fii”: verbul „a fi”, persoana a II-a.",
+    },
+    {
+      lesson: "ortografie",
+      type: "truefalse",
+      prompt: "Forma corectă este „fiii regelui”.",
+      answer: true,
+      explain: "Plural articulat de la „fiu”: fiii.",
+    },
+    // punctuație
+    {
+      lesson: "punctuatie",
+      type: "choice",
+      prompt: "Care propoziție este corect punctuată?",
+      options: [
+        "Ion Creangă, autorul poveștilor, s-a născut la Humulești.",
+        "Ion Creangă autorul poveștilor, s-a născut la Humulești.",
+        "Ion Creangă, autorul poveștilor s-a născut la Humulești.",
+        "Ion Creangă autorul poveștilor s-a născut, la Humulești.",
+      ],
+      answer: 0,
+      explain: "Apoziția „autorul poveștilor” se izolează prin virgule de ambele părți.",
+    },
+    {
+      lesson: "punctuatie",
+      type: "truefalse",
+      prompt: "Virgula se pune între subiect și predicat când subiectul e foarte lung.",
+      answer: false,
+      explain: "Niciodată între subiect și predicat, indiferent de lungime.",
+    },
+    {
+      lesson: "punctuatie",
+      type: "choice",
+      prompt: "Ce rol are linia de dialog?",
+      options: [
+        "marchează începutul replicii unui personaj",
+        "leagă două cuvinte rostite împreună",
+        "anunță o enumerare",
+        "marchează sfârșitul unei propoziții",
+      ],
+      answer: 0,
+      explain: "Linia de dialog introduce replica în vorbirea directă.",
+    },
+    // vocabular
+    {
+      lesson: "vocabular",
+      type: "choice",
+      prompt: "Care construcție este un pleonasm?",
+      options: ["a coborî jos", "a coborî repede", "a urca scările", "a reveni acasă"],
+      answer: 0,
+      explain: "„A coborî” înseamnă deja a merge în jos.",
+    },
+    {
+      lesson: "vocabular",
+      type: "choice",
+      prompt: "Ce sunt cuvintele „broască” (animal) și „broască” (încuietoare)?",
+      options: ["omonime", "paronime", "sinonime", "antonime"],
+      answer: 0,
+      explain: "Aceeași formă, sensuri fără legătură.",
+    },
+    {
+      lesson: "vocabular",
+      type: "choice",
+      prompt: "Completează: „Pericolul era ___, trebuia să acționăm imediat.”",
+      options: ["iminent", "eminent"],
+      answer: 0,
+      explain: "„Iminent” = care urmează să se întâmple sigur și curând.",
+    },
+    {
+      lesson: "vocabular",
+      type: "truefalse",
+      prompt: "„Cea mai optimă soluție” este o exprimare corectă.",
+      answer: false,
+      explain: "„Optim” înseamnă deja „cel mai bun”. Corect: „soluția optimă”.",
+    },
+  ],
+};
